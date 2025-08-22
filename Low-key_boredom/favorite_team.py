@@ -1,8 +1,8 @@
 #Favorite F1 Team
 def quiz():
     team = input("What is your favorite F1 team, enter help for a list of all teams: ").strip().lower()
-    if team == "Help":
-        print("The current F1 teams, as of 2025, are as follows: Alpine\nMercedes\nRedBull Racing\nFerrari\nWilliams\nAston Martin\nKick Sauber\nRacing Bulls\nHaas\nMcLaren.")
+    if team == "help":
+        print("The current F1 teams, as of 2025, are as follows:\nAlpine\nMercedes\nRedBull Racing\nFerrari\nWilliams\nAston Martin\nKick Sauber\nRacing Bulls\nHaas\nMcLaren.")
         quiz()
 
     elif team == "alpine":
