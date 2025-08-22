@@ -1,4 +1,8 @@
 #Favorite F1 Team
+import os
+import time
+dealy = 5
+
 def quiz():
     team = input("What is your favorite F1 team, enter help for a list of all teams: ").strip().lower()
     if team == "help":
@@ -6,35 +10,52 @@ def quiz():
         quiz()
 
     elif team == "alpine":
-        print("The current racers for Alpine are Pierre Gasly and Franco Colapinto.")
+        print("The current racers for Alpine are Pierre Gasly and Franco Colapinto.\nHonestly I don't know F1, maybe these guys are cool.")
+        quiz()
 
     elif team == "mercedes":
-        print("The current racers for Mercedes are Geroge Russell and Kimi Antonelli.")
+        print("The current racers for Mercedes are Geroge Russell and Kimi Antonelli.\nI'm not informed, but mercedes seems so basic of an answer")
+        quiz()
 
     elif team == "redbull racing":
-        print("The current racers for RedBull Racing are Max Verstappen and Yuki Tsunoda.")
+        print("The current racers for RedBull Racing are Max Verstappen and Yuki Tsunoda.\nRedBull was the only right answer, or at least until Max switches teams.")
+        print("You get a little surprise now")
+        time.sleep(3)
+        os.system("cls" if os.name == "nt" else "clear")
+        time.sleep(1)
+        print("Du Du Du Du")
+        time.sleep(3)
+        print("Max Verstappen")
+        quiz()
 
     elif team == "ferrari":
-        print("The current racers for Ferrari are Charles Leclerc and Lewis Hamilton.")
+        print("The current racers for Ferrari are Charles Leclerc and Lewis Hamilton.\nThis answer is acceptable because Leclerc.")
+        quiz()
 
     elif team == "williams":
-        print("The current racers for Williams are Alexander Albon and Carlos Sainz.")
+        print("The current racers for Williams are Alexander Albon and Carlos Sainz.\nWhy is the team name a more normal name that the racers names?")
+        quiz()
 
     elif team == "aston martin":
-        print("The current racers for Aston Martin are Lance Stroll and Fernando Alonso.")
+        print("The current racers for Aston Martin are Lance Stroll and Fernando Alonso.\nFernando will forever be the best rookie")
+        quiz()
 
     elif team == "kick sauber":
-        print("The current racers for Kick Sauber are Nico Hulkenburg and Gabriel Bortoleto.")
+        print("The current racers for Kick Sauber are Nico Hulkenburg and Gabriel Bortoleto.\nNico finally got a podium, lets gooooooo.\nI don't know who Nico is, but he finally got one and that's awesome")
+        quiz()
 
     elif team == "racing bulls":
-        print("The current racers for Racing Bulls are Liam Lawson and Isack Hadjar.")
+        print("The current racers for Racing Bulls are Liam Lawson and Isack Hadjar.\nRedBull has two teams?")
+        quiz()
 
     elif team == "haas":
-        print("The current racers for Haas are Esteban Ocon and Oliver Bearman.")
+        print("The current racers for Haas are Esteban Ocon and Oliver Bearman.\nNever heard of this team, but Esteban is a cool name")
+        quiz()
 
     elif team == "mclaren":
-        print("The current racers for McLaren are Oscar Piastri and Lando Norris.")
-
+        print("The current racers for McLaren are Oscar Piastri and Lando Norris.\nOscar Piastri is cool, but I don't know why.")
+        quiz()
+        
     else:
         print("Woah, please enter a valid team my guy.")
         quiz()
