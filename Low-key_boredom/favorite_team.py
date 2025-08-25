@@ -1,7 +1,6 @@
 #Favorite F1 Team
 import os
 import time
-dealy = 5
 
 def quiz():
     team = input("What is your favorite F1 team, enter help for a list of all teams: ").strip().lower()
@@ -18,13 +17,13 @@ def quiz():
         quiz()
 
     elif team == "redbull racing":
-        print("The current racers for RedBull Racing are Max Verstappen and Yuki Tsunoda.\nRedBull was the only right answer, or at least until Max switches teams.")
-        print("You get a little surprise now")
+        print("The current racers for RedBull Racing are Max Verstappen and Yuki Tsunoda.\nRedBull was the only right answer, or at least until Max switches teams.\n")
+        print("You get a little surprise now.\n")
         time.sleep(3)
         os.system("cls" if os.name == "nt" else "clear")
         time.sleep(1)
         print("Du Du Du Du")
-        time.sleep(3)
+        time.sleep(1.6)
         print("Max Verstappen")
         quiz()
 
