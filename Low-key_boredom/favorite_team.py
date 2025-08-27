@@ -60,7 +60,7 @@ def quiz():
         quiz()
 
 def watchesCheck():
-    watches = input("Do you watch F1 often(yes or no): ").strip().lower()
+    watches = input("Do you want to do da quiz(yes or no): ").strip().lower()
     if watches == "yes":
         quiz()
     elif watches == "no":
