@@ -6,7 +6,7 @@ full_name = first_name + " " + last_name
 phone_number = input("What is your phone number: ")
 gpa = float(input("What is your gpa: "))
 gpa = round(gpa,1)
-
+ 
 
 print(full_name)
 
