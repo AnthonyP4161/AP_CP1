@@ -18,7 +18,8 @@ def number_check():
         return phone_number
     else:
         print("Invalid, try again")
-        number_check()
+        phone_number = number_check()
+        return phone_number
 
 #runs number check and gets output
 phone_number = number_check()
