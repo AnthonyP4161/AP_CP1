@@ -1,4 +1,4 @@
-#AP, 1st Period, Input and Outputs Notes 
+#AP 1st Period, Input and Outputs Notes 
 
 #variable name = input("Question you're asking/instructions for user")
 name = input("What is your name: ")
