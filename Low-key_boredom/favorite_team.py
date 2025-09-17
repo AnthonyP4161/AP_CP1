@@ -31,7 +31,7 @@ def quiz():
         print("The current racers for Ferrari are Charles Leclerc and Lewis Hamilton.\n\nThis answer is acceptable because Leclerc.")
         justice_for_carlos = input(print("Does Carlos deserve justice, should he return to ferrari? PS, type yes or no")).strip().lower()
         if justice_for_carlos == "yes":
-            print("Good job, ")
+            print("Good job, Charles needs his bud back")
         quiz()
 
     elif team == "williams":
