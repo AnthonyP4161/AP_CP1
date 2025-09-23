@@ -43,7 +43,7 @@ def quiz():
         quiz()
 
     elif team == "kick sauber":
-        print("The current racers for Kick Sauber are Nico Hulkenburg and Gabriel Bortoleto.\n\nNico finally got a podium, lets gooooooo.\nI don't know who Nico is, but he finally got one and that's awesome")
+        print("The current racers for Kick Sauber are Nico Hulkenburg and Gabriel Bortoleto.\nNico finally got a podium, lets gooooooo.\nI don't know who Nico is, but he finally got a podium and that's awesome")
         quiz()
 
     elif team == "racing bulls":
