@@ -43,3 +43,5 @@ tt11ttt11t1t11tt11i:,...,11,,,,,it111,,.....,:,i11tt1111111111tttffttt
 tfffffttfffffffLfffftttttttttt11tffffffffffttttttt11111tfffffffffttfff"""
 
 print(rick)
+
+print("I am never going to give you up, I am never going to let you down, I am never gonna run around and desert you")

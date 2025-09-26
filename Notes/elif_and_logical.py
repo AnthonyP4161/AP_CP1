@@ -12,7 +12,7 @@ else:
     print("You didn't get an A or extra credit so you should just give up")
 
 username = "bob"
-password = "76"
+password = "67"
 user = input("Enter your username: ")
 pword = input("Enter your password: ")
 
