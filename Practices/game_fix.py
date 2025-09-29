@@ -1,4 +1,4 @@
-#AP 1st Peropd, Fix The Game
+#AP 1st Period, Fix The Game
 
 import random
 def start_game():
