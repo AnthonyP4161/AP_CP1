@@ -15,10 +15,3 @@ print(drivers)
 drivers.insert(3, "Leclerc")
 #drivers.extend(["Ohio", "Among Us"])
 print(drivers)
-
-
-
-
-
-
-print(random.choice(drivers,weights=(4,4,24,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4), k=20))
