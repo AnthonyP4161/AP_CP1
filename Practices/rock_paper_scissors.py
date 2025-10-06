@@ -1,8 +1,8 @@
 #AP 1st Period, Rock Paper Scissors
 import random
+player_score = 0
+computer_score = 0
 while True:
-    player_score = 0
-    computer_score = 0
     computer_choice = random.randint(1,3)
     print("Welcome to rock paper scissors")
     choice = input("Enter rock, paper, or scissors, or exit to leave: ").lower().strip()
@@ -45,3 +45,9 @@ while True:
         break
     else:
         print("Please enter something valid")
+    if player_score >= 3:
+        print(f"You won, your score was {player_score} and the computers was {computer_score}")
+        break
+    elif computer_score >=3:
+        print(f"You lost, your score was {player_score} and the computers was {computer_score}")
+        break
