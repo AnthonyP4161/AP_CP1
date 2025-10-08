@@ -1,0 +1,13 @@
+AP 1st Period, Tic Tac Toe Pseudocode
+
+Show the user what the program is doing and gives instructions
+
+Loop the program until the computer or user wins, or until the board is full and no one has won
+
+    Show the blank board with each spot assigned a number value, and ask the user which spot they want to user
+
+    Have the computer choose a random spot that hasn't been chosen yet
+
+    Display the current board with X's and O's in the spots chosen
+
+    Check if 
