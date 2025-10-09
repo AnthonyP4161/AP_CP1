@@ -1,13 +1,30 @@
 AP 1st Period, Tic Tac Toe Pseudocode
 
-Show the user what the program is doing and gives instructions
+import random
 
-Loop the program until the computer or user wins, or until the board is full and no one has won
+make the board with each spot saved as a variable with each variable being assigned a number 1-9 as a placeholder
 
-    Show the blank board with each spot assigned a number value, and ask the user which spot they want to user
+start a loop that will loop the whole game unitl someone wins 
+    print the board and ask the user which spot they want to put their X in
 
-    Have the computer choose a random spot that hasn't been chosen yet
+    replace the varaible corresponding to that with an X
 
-    Display the current board with X's and O's in the spots chosen
+    have the computer randomly choose a spot
 
-    Check if 
+    check if the spot has been taken
+
+    if it has been taken, then choose another one
+
+    if it hasn't been taken then replace the value with O
+
+    display the updated board with the users and computers chosen spots
+
+    check each possible win condition, checking if any complete rows, columns, or diagonals have been filled by one symbol
+
+    check if every spot has been filled AND no one has won
+
+    if no one has won and every spot is filled, then print that it was a tie and break out of the loop
+
+    if neither has won, then continue to the next iteration of the loop
+
+    if someone has won, print who has won and break the loop
