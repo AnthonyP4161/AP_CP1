@@ -3,10 +3,10 @@
 while True:
 #Set a variable of the special characters to check for
     special_char = "!@#$%^&*()_+-=[]{}|;:,.<>?"
-#get the users password
+#get the users password and sets the variable for the score
     password = input("Please enter a password to set as your password: ")
     score = 0
-#List that will have all the critera, which will be taken out before displaying if it meets it
+#List that will have all the critera, which will be taken out before displaying if it meets that specific criteria
     criteria = ["At least 8 characters","An uppercase letter","A lowercase letter","A number","A special character"]
 #Checks if the password is long enough and adds point if it does
     if len(password) >= 8:
@@ -36,7 +36,7 @@ while True:
             score+=1
             criteria.remove("A special character")
             break
-#Checks the strength and prints how strong it is, including what to improve
+#Checks the strength and prints how strong it is
     if score == 5:
         print("5/5 Very strong password")
         criteria = ["You did everything right, nothing to improve"]
@@ -48,7 +48,7 @@ while True:
         print(f"{score}/5 Weak password")
     else:
         print("Terrible password, did you even try?")
-
+#Tells the user how to imrpove their password
     print("Please improve the following:")
     for i in criteria:
         print(i)
