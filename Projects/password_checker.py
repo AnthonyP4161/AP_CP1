@@ -1,9 +1,9 @@
 #AP 1st Period, Password Strength Checker
 #loop everything
 while True:
-#get the users password
-    #Set a variable of the special characters to check for
+#Set a variable of the special characters to check for
     special_char = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+#get the users password
     password = input("Please enter a password to set as your password: ")
     score = 0
 #Checks if the password is long enough and adds point if it does
