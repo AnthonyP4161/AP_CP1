@@ -15,3 +15,5 @@ print(drivers)
 drivers.insert(3, "Leclerc")
 #drivers.extend(["Ohio", "Among Us"])
 print(drivers)
+
+print(drivers[-1])
