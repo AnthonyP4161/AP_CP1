@@ -43,15 +43,19 @@ while True:
                 #Add it to the new message
                 new_message = new_message + char
         return new_message
+    #Ask the user if they want to encode or decode
     choice = input("Would you like to encode or decode: ")
+    #If they choose encode then get all the information and run the encode function
     if choice == "encode":
         message = input("What message would you like to encode: ")
         shift = int(input("How many digits would you like to shift: "))
         print(encode(message,shift))
+    #If they choose decode then get all the information and run the decode function
     elif choice == "decode":
         message = input("What message would you like to decode: ")
         shift = int(input("How many digits would you like to shift: "))
         print(decode(message,shift))
+    #If they enter something else then loop it back
     else:
         print("Please enter a valid option")
         continue
