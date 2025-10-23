@@ -1,38 +1,57 @@
 #AP 1st period, Caesar Cipher Encoder and Decoder
+#Loop it
 while True:
-    #Make lists of all upper and lowercase leters
-    upper = r"[A-Z]"
-    lower = r"[a-z]"
-    #Make a function for encoding
-    def encoding(message, shift):
-        #Check if each character is an upper or lowercase letter
-        for i in message:
-            if i.isupper:
-                i = upper.index(i)+shift
-                new_message += i
-            elif i.islower:
-                i = lower.index(i)+shift
-                new_message += i
-
-    #Make a function for decoding
-    def decoding(message, shift):
-        print("Hi")
-
-    #Ask the user whether they want to encode or decode and call the corresponding function
-    choice = input("To encode a message, type encode, to decode a message type decode: ").strip().lower()
-    #Have the user choose how many characters they want to shift
-    shift = int(input("How many digits would you like to shift, please enter a digit not a word: "))
-    #Have the user type their message
-    message = input("Please type the message: ")
-    #Encode the message if the user chose to encode and print it
+    #Make the lists of all characters
+    upper = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    lower = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    #Make the functions
+    def encode(message,shift):
+        #Make the new message variable
+        new_message = "Your new message is: "
+        #Check each character
+        for char in message:
+            #Check if char in upper and lower lists
+            if char in upper:
+                #Shift the character up
+                char = upper.index(char) + shift
+                char = upper[char]
+                #Add it to the new message
+                new_message = new_message + char
+            elif char in lower:
+                #Shift the character up
+                char = lower.index(char) + shift
+                char = lower[char]
+                #Add it to the new message
+                new_message = new_message + char
+        return new_message
+    def decode(message,shift):
+        #Make the new message variable
+        new_message = "Your new message is: "
+        #Check each character
+        for char in message:
+            #Check if char in upper and lower lists
+            if char in upper:
+                #Shift the character down
+                char = upper.index(char) - shift
+                char = upper[char]
+                #Add it to the new message
+                new_message = new_message + char
+            elif char in lower:
+                #Shift the character down
+                char = lower.index(char) - shift
+                char = lower[char]
+                #Add it to the new message
+                new_message = new_message + char
+        return new_message
+    choice = input("Would you like to encode or decode: ")
     if choice == "encode":
-        encoded_message = encoding(message, shift)
-        print(f"Your encoded message is {encoded_message}")
-    #Decode the message if the user chose to decode and print it
+        message = input("What message would you like to encode: ")
+        shift = int(input("How many digits would you like to shift: "))
+        print(encode(message,shift))
     elif choice == "decode":
-        decoded_message = decoding(message,shift)
-        print(f"Your decoded message is {decoded_message}")
-    #Have the user try again if they didn't choose either
+        message = input("What message would you like to decode: ")
+        shift = int(input("How many digits would you like to shift: "))
+        print(decode(message,shift))
     else:
-        print("That's not a valid input, please try again")
+        print("Please enter a valid option")
         continue
