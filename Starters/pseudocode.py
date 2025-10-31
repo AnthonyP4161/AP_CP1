@@ -17,21 +17,21 @@ while True:
         computer_choice = random.randint(1,9)
         continue
     if computer_choice == 1:
-        grid[0] = O
+        grid[0] = "O"
     elif computer_choice == 2:
         grid[1] = "O"
     elif computer_choice == 3:
-        grid[2] = O
+        grid[2] = "O"
     elif computer_choice == 4:
-        grid[3] = O
+        grid[3] = "O"
     elif computer_choice == 5:
-        grid[4] = O
+        grid[4] = "O"
     elif computer_choice == 6:
-        grid[5] = O
+        grid[5] = "O"
     elif computer_choice == 7:
-        grid[6] = O
+        grid[6] = "O"
     elif computer_choice == 8:
-        grid[7] = O
+        grid[7] = "O"
     elif computer_choice == 9:
-        grid[8] = O
+        grid[8] = "O"
     print(grid)
