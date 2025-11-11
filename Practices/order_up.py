@@ -23,4 +23,11 @@ side_dish = {
 print("The main courses we have are:")
 for i in main_course:
     print(i)
-main_choice = input("What would you like to order: ")
+while True:
+    main_choice = input("What would you like to order: ").capitalize().strip()
+    if main_choice in main_course.keys():
+        total = main_course[main_choice]
+        break
+    else:
+       print("Please choose a valid option")
+       continue
