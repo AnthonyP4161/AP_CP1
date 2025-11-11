@@ -1,50 +1,63 @@
 #AP 1st Period, Turtle Maze Generator
 import turtle
 import random
-
+#make the turtle
+maze = turtle.Turtle()
 #generate the maze
 def generate():
-    maze = turtle.Turtle()
     maze.hideturtle()
     maze.speed(0)
     maze.penup()
     maze.goto(300,300)
     maze.pendown()
-    maze.goto(50,300)
+    maze.goto(0,300)
     maze.penup()
-    maze.goto(-50,300)
+    maze.goto(-100,300)
     maze.pendown()
     maze.goto(-300,300)
     maze.goto(-300,-300)
-    maze.goto(-50,-300)
+    maze.goto(-100,-300)
     maze.penup()
-    maze.goto(50,-300)
+    maze.goto(0,-300)
     maze.pendown()
     maze.goto(300,-300)
     maze.goto(300,300)
-#check if the turtle is at the end
-def is_solvable(row_grid,col_grid):
-    size = len(row_grid)-1
-    visited = set()
-    stack = [(0,0)]
-    while stack:
-        x,y = stack.pop()
-
-        if x == size-1 and y == size-1:
-            return True
-        if (x,y) in visited:
-            continue
-        visited.add((x,y))
-        
-        if x<size-1 and col_grid[y][x+1] == 0:
-            stack.append((x+1,y))
-        if y<size-1 and row_grid[y+1][x] == 0:
-            stack.append((x,y+1))
-        if x>0 and col_grid[y][x] == 0:
-            stack.append((x-1,y))
-        if y>0 and row_grid[y][x] == 0:
-            stack.append((x,y-1))
-    return False
-
+    maze.penup()
+    maze.goto(-300,200)
+    maze.penup()
+    #call the function
 generate()
+#repeat it for every row
+for i in range(1,6):
+    #repeat again
+    for i in range(1,7):
+        #get a random integer to decide whether or not to place wall
+        idk = random.randint(0,1)
+        #get the y coordinates
+        ycord=maze.ycor()
+        #if idk was 1, it made a wall, if not it doesnt
+        if idk == 1:
+            maze.pendown()
+            maze.forward(100)
+            maze.penup()
+        else:
+            maze.forward(100)
+    #goes down a row for next iteration
+    maze.goto(-300,ycord-100)
+#goes to start to set up for making columns
+maze.goto(-200,300)
+#same thing as making rows, just for columns now
+for i in range(1,6):
+    for i in range(1,7):
+        idk = random.randint(0,1)
+        xcord = maze.xcor()
+        ycord = maze.ycor()
+        if idk == 1:
+            maze.pendown()
+            maze.goto(xcord,ycord-100)
+            maze.penup()
+        else:
+            maze.goto(xcord,ycord-100)
+    maze.goto(xcord+100,300)
+#exit the program when they click
 turtle.exitonclick()

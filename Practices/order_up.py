@@ -1,23 +1,26 @@
 #AP 1st Period, Order Up
 
 main_course = {
-    "burger":5.99,
-    "sandwhich":4.99,
-    "grilled cheese":4.32,
-    "steak":67.67,
-    "eggs":5.49
+    "Burger":5.99,
+    "Sandwhich":4.99,
+    "Grilled cheese":4.32,
+    "Steak":67.67,
+    "Eggs":5.49
 }
 drink = {
-    "coke":3.99,
-    "fanta":3.99,
-    "sprite":3.99,
-    "pepsi":3.99
+    "Coke":3.99,
+    "Canta":3.99,
+    "Sprite":3.99,
+    "Pepsi":3.99
 }
 side_dish = {
-    "mac and cheese":2.99,
-    "mashed potatoes":3.99,
-    "bread sticks":2.99,
-    "fries":3.50,
-    "onion rings":3.99
+    "Mac and Cheese":2.99,
+    "Mashed Potatoes":3.99,
+    "Bread Sticks":2.99,
+    "Fries":3.50,
+    "Onion Rings":3.99
 }
-
+print("The main courses we have are:")
+for i in main_course:
+    print(i)
+main_choice = input("What would you like to order: ")
