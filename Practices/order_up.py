@@ -1,5 +1,5 @@
 #AP 1st Period, Order Up
-#list for the main courses
+#dictionary for the main courses
 main_course = {
     "Burger":5.99,
     "Sandwhich":4.99,
@@ -7,14 +7,14 @@ main_course = {
     "Steak":67.67,
     "Eggs":5.49
 }
-#list for the drinks
+#dictionary for the drinks
 drink = {
     "Coke":3.99,
     "Canta":3.99,
     "Sprite":3.99,
     "Pepsi":3.99
 }
-#list for the side dishes
+#dictionary for the side dishes
 side_dish = {
     "Mac and cheese":2.99,
     "Mashed potatoes":3.99,
