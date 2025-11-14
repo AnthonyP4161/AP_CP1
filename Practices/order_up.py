@@ -39,35 +39,26 @@ while True:
     else:
        print("Please choose a valid option")
        continue
-#print the side dishes and prices
-print("The side dishes we have are:")
-for i in side_dish:
-    key = side_dish[i]
-    print(f"{i}: ${key}")
+
+#make a function for the side dishes
+def get_side_dish():
+    #print the side dishes and prices
+    print("The side dishes we have are:")
+    for i in side_dish:
+        key = side_dish[i]
+        print(f"{i}: ${key}")
 #check what the user wants and make sure its an option
-while True:
-    side_choice1 = input("What would you like to order, type none if you dont want any: ").capitalize().strip()
-    if side_choice1 in side_dish.keys():
-        total += side_dish[side_choice1]
-        break
-    elif side_choice1 == "None":
-        side_choice1 = "nothing"
-        break
-    else:
-       print("Please choose a valid option")
-       continue
-#check what the user wants for their second side dish and make sure its an option
-while True:
-    side_choice2 = input("What would you like to order for your second side dish, type none if you dont want any: ").capitalize().strip()
-    if side_choice2 in side_dish.keys():
-        total += side_dish[side_choice2]
-        break
-    elif side_choice2 == "None":
-        side_choice2 = "nothing"
-        break
-    else:
-       print("Please choose a valid option")
-       continue
+    while True:
+        side_choice = input("What would you like to order, type none if you dont want any: ").capitalize().strip()
+        if side_choice in side_dish.keys():
+            break
+        elif side_choice == "None":
+            side_choice = "nothing"
+            break
+        else:
+           print("Please choose a valid option")
+           continue
+    return side_choice
 #Print what drinks there are
 print("The drinks we have are:")
 for i in drink:
@@ -85,5 +76,21 @@ while True:
     else:
        print("Please choose a valid option")
        continue
+
+#set the side dishes from the functions as variables to use and check if the side dishes are an option
+while True:
+    side_dish1 = get_side_dish()
+    if side_dish1 in side_dish.keys():
+        total += side_dish[side_dish1]
+    else:
+        print("Please choose a valid option")
+        continue
+    side_dish2 = get_side_dish()
+    if side_dish2 in side_dish.keys():
+        total += side_dish[side_dish2]
+        break
+    else:
+        print("Please choose a valid option")
+        continue
 #print out the order and total price
-print(f"Your order:\nMain Dish: {main_choice}\nSide Dishes: {side_choice1} & {side_choice2}\nDrink: {drink_choice}\nTotal Price: ${total}")
+print(f"Your order:\nMain Dish: {main_choice}\nSide Dishes: {side_dish1} & {side_dish2} \nDrink: {drink_choice}\nTotal Price: ${total}")
