@@ -1,2 +1,2 @@
 
-            continue
+        num-=1
