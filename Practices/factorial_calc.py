@@ -14,6 +14,7 @@ def calculate(num):
 #print the instructions for the user
 print("Welcome to the factorial calculator")
 #have the user input something
+#original code didn't include proper way to check the variable
 while True:
     num = input("Please input a whole, positive number: ")
     if "-" in num:
