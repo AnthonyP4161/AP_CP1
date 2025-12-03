@@ -1,13 +1,59 @@
 #import all libraries needed
+import random
+import os
+import time
 #a variable for the pokenots base health so the pokenot center will know what value to return it to
+base_health = 0
 #a variable for the pokenots current health so damage can be dealt
+health = 0
 #a variable for the pokenots attack power
+attack = 0
 #a variable that will be made true or false whether or not they talk to the npc in the town square
+talked_to_npc = False
 #a list for the users inventory
+inventory = []
+#variable for delay so printing will go slowly
+delay = .001
 #a loop for all the code so the user can play again or exit
+while True:
+    #define function for clearing terminal
+    def clear():
+        os.system("cls" if os.name == "nt" else "clear")
+    clear()
+    #Display the title screen and let them start
+    title = """
+ /$$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$$ /$$   /$$  /$$$$$$  /$$$$$$$$
+| $$__  $$ /$$__  $$| $$  /$$/| $$_____/| $$$ | $$ /$$__  $$|__  $$__/
+| $$  \ $$| $$  \ $$| $$ /$$/ | $$      | $$$$| $$| $$  \ $$   | $$   
+| $$$$$$$/| $$  | $$| $$$$$/  | $$$$$   | $$ $$ $$| $$  | $$   | $$   
+| $$____/ | $$  | $$| $$  $$  | $$__/   | $$  $$$$| $$  | $$   | $$   
+| $$      | $$  | $$| $$\  $$ | $$      | $$\  $$$| $$  | $$   | $$   
+| $$      |  $$$$$$/| $$ \  $$| $$$$$$$$| $$ \  $$|  $$$$$$/   | $$   
+|__/       \______/ |__/  \__/|________/|__/  \__/ \______/    |__/ \n"""
+    for char in title:
+        print(char, end="")
+        time.sleep(delay)
+    input("Press enter to continue")
+    clear()
+    #print the welcoming
+    welcome = "Hello and welcome to Pokenot! This is a totally original game design, as well as the name not at all being stolen."
+    for char in welcome:
+        print(char, end="")
+        time.sleep(delay)
     #get the users name and store it in a variable
+    get_name = "\nPlease enter your name"
+    for char in get_name:
+        print(char,end="")
+        time.sleep(delay)
+    name = input("\n")
     #define the function for the first room
+    def starter_room():
         #display the description of the room
+        description = "Hello and welcome to my lab. I'm Professor Spruce and I'll be giving your first Pokenot to begin your adventure!\nYou can choose from Charman, a fire type lizard, Boolbiesore, a grass type dinosaur, or Squishy, a water type turtle. What one would you like: "
+        for char in description:
+            print(char,end="")
+            time.sleep(delay) 
+        starter = input("")       
         #ask the user which starter they would like to choose
         #set the users stats based off their choice
         #let the user leave the room finally
