@@ -1,5 +1,11 @@
 #import all libraries needed
+#a variable for the pokenots base health so the pokenot center will know what value to return it to
+#a variable for the pokenots current health so damage can be dealt
+#a variable for the pokenots attack power
+#a variable that will be made true or false whether or not they talk to the npc in the town square
+#a list for the users inventory
 #a loop for all the code so the user can play again or exit
+    #get the users name and store it in a variable
     #define the function for the first room
         #display the description of the room
         #ask the user which starter they would like to choose
