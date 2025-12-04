@@ -12,14 +12,17 @@ attack = 0
 talked_to_npc = False
 #a list for the users inventory
 inventory = []
-#variable for delay so printing will go slowly
-delay = .001
 #a loop for all the code so the user can play again or exit
 while True:
     #define function for clearing terminal
     def clear():
         os.system("cls" if os.name == "nt" else "clear")
     clear()
+    #define function for printing text fancy
+    def fancy(yo_momma):
+        for char in yo_momma:
+            print(char,end="")
+            time.sleep(.001)
     #Display the title screen and let them start
     title = """
  /$$$$$$$   /$$$$$$  /$$   /$$ /$$$$$$$$ /$$   /$$  /$$$$$$  /$$$$$$$$
@@ -30,48 +33,76 @@ while True:
 | $$      | $$  | $$| $$\  $$ | $$      | $$\  $$$| $$  | $$   | $$   
 | $$      |  $$$$$$/| $$ \  $$| $$$$$$$$| $$ \  $$|  $$$$$$/   | $$   
 |__/       \______/ |__/  \__/|________/|__/  \__/ \______/    |__/ \n"""
-    for char in title:
-        print(char, end="")
-        time.sleep(delay)
+    fancy(title)
     input("Press enter to continue")
     clear()
     #print the welcoming
     welcome = "Hello and welcome to Pokenot! This is a totally original game design, as well as the name not at all being stolen."
-    for char in welcome:
-        print(char, end="")
-        time.sleep(delay)
+    fancy(welcome)
     #get the users name and store it in a variable
     get_name = "\nPlease enter your name"
-    for char in get_name:
-        print(char,end="")
-        time.sleep(delay)
+    fancy(get_name)
     name = input("\n")
     #define the function for the first room
     def starter_room():
         #display the description of the room
-        description = "Hello and welcome to my lab. I'm Professor Spruce and I'll be giving your first Pokenot to begin your adventure!\nYou can choose from Charman, a fire type lizard, Boolbiesore, a grass type dinosaur, or Squishy, a water type turtle. What one would you like: "
-        for char in description:
-            print(char,end="")
-            time.sleep(delay) 
-        starter = input("")       
         #ask the user which starter they would like to choose
         #set the users stats based off their choice
+        description = "Hello and welcome to my lab. I'm Professor Spruce and I'll be giving your first Pokenot to begin your adventure!\nYou can choose from Charman, a fire type lizard, Boolbiesore, a grass type dinosaur, or Squishy, a water type turtle. What one would you like: "
+        fancy(description)
+        while True:
+            starter = input("").capitalize().strip()
+            if starter == "Charman":
+                base_health = 50
+                health = 50
+                attack = 10
+                break
+            elif starter == "Boolbiesore":
+                base_health = 60
+                health = 60
+                attack = 8
+                break
+            elif starter =="Squishy":
+                base_health = 55
+                health = 55
+                attack = 9
+                break
+            else:
+                womp_womp = "Please double check your spelling or enter a valid option this time:"
+                fancy(womp_womp)
+                continue
         #let the user leave the room finally
+        exit = "Now you're finally ready to begin your adventure! Press enter when you're ready to continue"
+        fancy(exit)
+        input()
         #return the choice and stats to the rest of the program
+        return base_health,health,attack,starter
     #define the function for the path
+    def path1():
         #display the description of the path
+        description = "As you exit the lab, you enter a beaten old path with not much choice other than to go on ahead. Type yes if you'd like to look around: "
+        fancy(description)
         #give them the option to look around(though there wont be anything)
+        if input("") == "yes":
+            womp_womp = "You look around but can't seen to find anything"
+            fancy(womp_womp)
         #let them move to the next area
-    #define the funciton for the town square
-        #display the description of town square
-        #get their choice of where they want to go or talk to the npcs
-        #if they choose to talk to the npcs then go through the dialogue which will allow them to get a secret later on
-        #go back to the start of this function so they can make a choice again
-        #if they choose not to talk to the npcs then move them to the next area they chose
+        exit = "Ready to move on? Press enter when you're ready to continue"
+        fancy(exit)
+        input()
     #define the function for the shop
+    def shop():
         #display the description of the shop
+        description = "As you walk into the shop, you see a person behind the counter, presumably the shopkeeper.\nType talk or leave to choose: "
+        fancy(description)
         #give them the option to leave or to talk to the npc to buy something
-        #if they've already talked to the npc then the npc will kick them out and they will be returned to town square
+        choice = input("").strip().lower()
+        if choice == "talk":
+            if "potion" in inventory:
+                get_out = "Hey didn't I alrady give you something? Get lost!"
+                fancy(get_out)
+            else:
+                gift_giving = "Hi and welcome to my shop! We sell everything from potions to pokespheres, anything a new trainer would need! What would you like to buy....\nHEY! You don't have any money, do you? Still, take this as a gift"
         #if they talk to the npc, they'll realize they have no money and can't buy anything, but the shop owner will give them a free potion anyways
         #add the gift to the users inventory
         #return them to the town square
@@ -88,6 +119,38 @@ while True:
         #if they win then their pokemon will level up and gain more attack and health
         #if they loose then they'll be taken to the pokenot center
         #if they choose to leave then return them to town square
+    #define the funciton for the town square
+    def town_square():
+        #display the description of town square
+        description = "You walk into the town square and see a sign. Welcome to Pal town! There's a few buildings, a shop and a building labeled Pokenot Center? There's also a field and a person standing around\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on:"
+        fancy(description)
+        while True:
+        #get their choice of where they want to go or talk to the npc
+            choice = input("").lower().strip()
+            if choice == "shop":
+                shop()
+                continue
+            elif choice == "center":
+                pokenot_center()
+                continue
+            elif choice == "field":
+                training_field()
+                continue
+            #if they choose to talk to the npcs then go through the dialogue which will allow them to get a secret later on
+            elif choice == "talk":
+                dialogue = "Hi, you don't look like you're from around here, welcome to Pal Town! The name's Garey Spruce, I'm the professors grandson.\nLet me give you a little secret. On the path to the Gym, I hid a special gift for anyone to find. Keep an eye out when you get there!"
+                fancy(dialogue)
+                talked_to_npc = True
+                continue
+            elif choice == "continue":
+                break
+            else:
+                fancy("Please enter a valid input")
+                continue
+        exit = "You're ready to move on? Press enter to go when you're ready"
+        fancy(exit)
+        input()
+        return
     #define the function for the second path
         #display the description of the path
         #if they talked to the npc in town square, then give them the option to search a bush where they'll find a secret pokesphere
