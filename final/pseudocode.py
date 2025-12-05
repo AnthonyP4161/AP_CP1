@@ -98,27 +98,99 @@ while True:
         #give them the option to leave or to talk to the npc to buy something
         choice = input("").strip().lower()
         if choice == "talk":
+            #if they talk to the npc, they'll realize they have no money and can't buy anything, but the shop owner will give them a free potion anyways
             if "potion" in inventory:
                 get_out = "Hey didn't I alrady give you something? Get lost!"
                 fancy(get_out)
             else:
                 gift_giving = "Hi and welcome to my shop! We sell everything from potions to pokespheres, anything a new trainer would need! What would you like to buy....\nHEY! You don't have any money, do you? Still, take this as a gift"
-        #if they talk to the npc, they'll realize they have no money and can't buy anything, but the shop owner will give them a free potion anyways
-        #add the gift to the users inventory
-        #return them to the town square
+                fancy(gift_giving)
+                #add the gift to the users inventory
+                inventory.append("potion")
+            #return them to the town square
+            town_square()
     #define the function for the pokenot center
-        #display the description of the room
-        #give them the option to heal their pokenots or to talk to the nurse, Nurse Happy
-        #nurse happy will explain how the pokenot center works if you talk to her
-        #if you heal your pokemon then their health will be fully restored to the base stat
-        #return them to town square
+    def pokenot_center(sigma):
+        if sigma == "choice":
+            #display the description of the room
+            description = "As you enter the Pokenot Center, you see a woman behind a desk in a nurses outfit. As you approach, she says Hi and welcome to the Pokenot Center! I'm nurse Happy. Type heal, explain, or leave"
+            fancy(description)
+            #give them the option to heal their pokenots or to talk to the nurse, Nurse Happy
+            while True:
+                choice = input("").strip().lower()
+                #if you heal your pokemon then their health will be fully restored to the base stat
+                if choice == "heal":
+                    health = base_health
+                    yippie = "Alright, your pokenots are all healed up!"
+                    fancy(yippie)
+                    break
+                #nurse happy will explain how the pokenot center works if you talk to her
+                elif choice == "explain":
+                    explanation = "This is a Pokenot Center, where you can heal all your Pokenot! It's completely free and essential to any trainer! So, type heal, explain, or leave:"
+                    fancy(explanation)
+                    continue
+                elif choice == "leave":
+                    bye_bye = "Thank you for visiting the Pokenot Center!"
+                    fancy(bye_bye)
+                    break
+                else:
+                    fancy("Please enter something valid! Your choices are heal, explain, or leave.")
+                    continue
+        else:
+            health = base_health
+            oh_no = "You took a beating out there. Your Pokenots have been restored to full health and you're free to go!"
+            fancy(oh_no)
+        return health
     #define the function for the training ground
+    def training_field():
+        #enemy stats
+        enemy_health = 55
+        enemy_attack = 9
         #describe the training ground and what they can do there
+        description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle if you'd like to practice battle me or leave"
+        fancy(description)
         #give them the option to leave or battle the trainer
-        #if they choose to battle then have them battle
-        #if they win then their pokemon will level up and gain more attack and health
-        #if they loose then they'll be taken to the pokenot center
-        #if they choose to leave then return them to town square
+        while True:
+            choice = input().strip().lower()
+            if choice == "battle":
+                #if they choose to battle then have them battle
+                yippie = "Yes! I haven't had someone to battle in forever, no backing out now!"
+                fancy(yippie)
+                while True:
+                    def enemy_turn():
+                        fancy("I attack! Squishy, use spit!")
+                        health -= enemy_attack
+                        if health <= 0:
+                            fancy("Oh no, you lost. You're a loser! How does it feel to lose to a little girl?")
+                            pokenot_center("dead")
+                        else:
+                            user_turn()
+                    def user_turn():
+                        choose = "Type attack, potion(if you have one), or forfeit"
+                        fancy(choose)
+                        choice = input().strip().lower()
+                        if choice == "attack":
+                            enemy_health -= attack
+                            enemy_turn()
+                        elif choice == "potion":
+                            if "potion" in inventory:
+                                health += 20
+                                enemy_turn()
+                            else:
+                                womp_womp = "You don't have a potion! Try something else"
+                                fancy(womp_womp)
+                                user_turn()
+                        elif choice == "forfeit":
+                            fancy("Too bad, you can't forfeit a trainer battle!")
+                            user_turn()
+                #if they win then their pokemon will level up and gain more attack and health
+                #if they loose then they'll be taken to the pokenot center
+            elif choice == "leave":
+                #if they choose to leave then return them to town square
+                break
+            else:
+                fancy("Please enter something valid! Your choices are battle or leave")
+                continue
     #define the funciton for the town square
     def town_square():
         #display the description of town square

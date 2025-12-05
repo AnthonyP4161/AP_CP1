@@ -70,4 +70,4 @@ while True:
         print(f"{partner} has fainted!")
         break
     else:
-        healthh = enemy_turn(health)
+        health = enemy_turn(health)
