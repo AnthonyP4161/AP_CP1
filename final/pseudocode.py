@@ -146,6 +146,23 @@ while True:
         #enemy stats
         enemy_health = 55
         enemy_attack = 9
+        def user_turn():
+            fancy("Type attack, potion, or forfeit")
+            choice = input()
+            if choice == "attack":
+                return "attack"
+            elif choice == "potion":
+                return "health"
+            elif choice == "forfeit":
+                fancy("Too bad, you can't forfeit a trainer battle!")
+                user_turn()
+            else:
+                print("Choose a valid option")
+                user_turn()
+        def enemy_turn(health):
+            health-=enemy_attack
+            fancy(f"Squishy attacked! your Pokenot has {health} remaining!")
+            return health
         #describe the training ground and what they can do there
         description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle if you'd like to practice battle me or leave"
         fancy(description)
@@ -157,33 +174,37 @@ while True:
                 yippie = "Yes! I haven't had someone to battle in forever, no backing out now!"
                 fancy(yippie)
                 while True:
-                    def enemy_turn():
-                        fancy("I attack! Squishy, use spit!")
-                        health -= enemy_attack
-                        if health <= 0:
-                            fancy("Oh no, you lost. You're a loser! How does it feel to lose to a little girl?")
-                            pokenot_center("dead")
+                    action = user_turn()
+                    if action == "attack":
+                        enemy_health -= attack
+                        if enemy_health <0:
+                            fancy("Squishy has fainted!")
+                            won = True
+                            break
                         else:
-                            user_turn()
-                    def user_turn():
-                        choose = "Type attack, potion(if you have one), or forfeit"
-                        fancy(choose)
-                        choice = input().strip().lower()
-                        if choice == "attack":
-                            enemy_health -= attack
-                            enemy_turn()
-                        elif choice == "potion":
-                            if "potion" in inventory:
-                                health += 20
-                                enemy_turn()
-                            else:
-                                womp_womp = "You don't have a potion! Try something else"
-                                fancy(womp_womp)
-                                user_turn()
-                        elif choice == "forfeit":
-                            fancy("Too bad, you can't forfeit a trainer battle!")
-                            user_turn()
+                            fancy(f"You attacked pikachu! Pikachu now has {enemy_health} health remaining")
+                    elif action == "health":
+                        health += 15
+                        print(f"You healed your Pokenot, they now have {health} health left")
+                    elif action == "forfeit":
+                        fancy("Too flipping bad, you can't forfeit a trainer battle!")
+                        continue
+                    else:
+                        fancy("Yo, you gotta enter a valid input!")
+                        continue
+                    if health <= 0:
+                        fancy("You lost! You're a loser! How does it feel to lose to a little girl? Come back after being patched up")
+                    else:
+                        health = enemy_turn(health)
                 #if they win then their pokemon will level up and gain more attack and health
+                if won:
+                    health+=10
+                    attack+=10
+                    base_health+=10
+                    return health,base_health,attack
+                else:
+                    pokenot_center("dead")
+                    return health,base_health,attack
                 #if they loose then they'll be taken to the pokenot center
             elif choice == "leave":
                 #if they choose to leave then return them to town square
@@ -203,7 +224,7 @@ while True:
                 shop()
                 continue
             elif choice == "center":
-                pokenot_center()
+                health, base_health,attack = pokenot_center()
                 continue
             elif choice == "field":
                 training_field()
@@ -222,7 +243,7 @@ while True:
         exit = "You're ready to move on? Press enter to go when you're ready"
         fancy(exit)
         input()
-        return
+        return health,base_health,attack,talked_to_npc
     #define the function for the second path
         #display the description of the path
         #if they talked to the npc in town square, then give them the option to search a bush where they'll find a secret pokesphere
