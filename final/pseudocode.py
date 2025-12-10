@@ -142,7 +142,8 @@ while True:
             fancy(oh_no)
         return health
     #define the function for the training ground
-    def training_field():
+    def training_field(base_health,health,attack,starter):
+        #your stats
         #enemy stats
         enemy_health = 55
         enemy_attack = 9
@@ -161,7 +162,7 @@ while True:
                 user_turn()
         def enemy_turn(health):
             health-=enemy_attack
-            fancy(f"Squishy attacked! your Pokenot has {health} remaining!")
+            fancy(f"Squishy attacked! your {starter} has {health} remaining!")
             return health
         #describe the training ground and what they can do there
         description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle if you'd like to practice battle me or leave"
@@ -186,6 +187,7 @@ while True:
                     elif action == "health":
                         health += 15
                         print(f"You healed your Pokenot, they now have {health} health left")
+                        continue
                     elif action == "forfeit":
                         fancy("Too flipping bad, you can't forfeit a trainer battle!")
                         continue
@@ -194,17 +196,20 @@ while True:
                         continue
                     if health <= 0:
                         fancy("You lost! You're a loser! How does it feel to lose to a little girl? Come back after being patched up")
+                        won = False
                     else:
                         health = enemy_turn(health)
+                        continue
+                    break
                 #if they win then their pokemon will level up and gain more attack and health
-                if won:
+                if won == True:
                     health+=10
                     attack+=10
                     base_health+=10
-                    return health,base_health,attack
+                    return health,base_health,attack,starter
                 else:
-                    pokenot_center("dead")
-                    return health,base_health,attack
+                    health = pokenot_center("dead")
+                    return health,base_health,attack,starter
                 #if they loose then they'll be taken to the pokenot center
             elif choice == "leave":
                 #if they choose to leave then return them to town square
@@ -212,8 +217,9 @@ while True:
             else:
                 fancy("Please enter something valid! Your choices are battle or leave")
                 continue
+        return base_health,health,attack,starter
     #define the funciton for the town square
-    def town_square():
+    def town_square(base_health,health,attack,starter):
         #display the description of town square
         description = "You walk into the town square and see a sign. Welcome to Pal town! There's a few buildings, a shop and a building labeled Pokenot Center? There's also a field and a person standing around\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on:"
         fancy(description)
@@ -224,10 +230,10 @@ while True:
                 shop()
                 continue
             elif choice == "center":
-                health, base_health,attack = pokenot_center()
+                health = pokenot_center()
                 continue
             elif choice == "field":
-                training_field()
+                base_health,health,attack,starter = training_field(base_health,health,attack,starter)
                 continue
             #if they choose to talk to the npcs then go through the dialogue which will allow them to get a secret later on
             elif choice == "talk":
@@ -263,3 +269,6 @@ while True:
     #display the introduction to the game
     #start them off in the first room
     #make all the basic stats and things as variables for inventory, attack, health
+    base_health,health,attack,starter = starter_room()
+    path1()
+    town_square(base_health,health,attack,starter)
