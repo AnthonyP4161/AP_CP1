@@ -75,21 +75,23 @@ while True:
         exit = "Now you're finally ready to begin your adventure! Press enter when you're ready to continue"
         fancy(exit)
         input()
+        clear()
         #return the choice and stats to the rest of the program
         return base_health,health,attack,starter
     #define the function for the path
     def path1():
         #display the description of the path
-        description = "As you exit the lab, you enter a beaten old path with not much choice other than to go on ahead. Type yes if you'd like to look around: "
+        description = "As you exit the lab, you enter a beaten old path with not much choice other than to go on ahead. Type yes if you'd like to look around, or enter if you don't want to: "
         fancy(description)
         #give them the option to look around(though there wont be anything)
         if input("") == "yes":
-            womp_womp = "You look around but can't seen to find anything"
+            womp_womp = "You look around but can't seen to find anything\n"
             fancy(womp_womp)
         #let them move to the next area
-        exit = "Ready to move on? Press enter when you're ready to continue"
+        exit = "Ready to move on? Press enter when you're ready to continue\n"
         fancy(exit)
         input()
+        clear()
     #define the function for the shop
     def shop():
         #display the description of the shop
@@ -100,20 +102,23 @@ while True:
         if choice == "talk":
             #if they talk to the npc, they'll realize they have no money and can't buy anything, but the shop owner will give them a free potion anyways
             if "potion" in inventory:
-                get_out = "Hey didn't I alrady give you something? Get lost!"
+                get_out = "Hey didn't I alrady give you something? Get lost!\n"
                 fancy(get_out)
+                fancy("Press enter to continue\n")
+                input()
             else:
-                gift_giving = "Hi and welcome to my shop! We sell everything from potions to pokespheres, anything a new trainer would need! What would you like to buy....\nHEY! You don't have any money, do you? Still, take this as a gift"
+                gift_giving = "Hi and welcome to my shop! We sell everything from potions to pokespheres, anything a new trainer would need! What would you like to buy....\nHEY! You don't have any money, do you? Still, take this as a gift\n"
                 fancy(gift_giving)
                 #add the gift to the users inventory
                 inventory.append("potion")
             #return them to the town square
-            town_square()
+            clear()
+        return inventory
     #define the function for the pokenot center
     def pokenot_center(sigma):
         if sigma == "choice":
             #display the description of the room
-            description = "As you enter the Pokenot Center, you see a woman behind a desk in a nurses outfit. As you approach, she says Hi and welcome to the Pokenot Center! I'm nurse Happy. Type heal, explain, or leave"
+            description = "As you enter the Pokenot Center, you see a woman behind a desk in a nurses outfit. As you approach, she says Hi and welcome to the Pokenot Center! I'm nurse Happy. Type heal, explain, or leave: "
             fancy(description)
             #give them the option to heal their pokenots or to talk to the nurse, Nurse Happy
             while True:
@@ -121,34 +126,34 @@ while True:
                 #if you heal your pokemon then their health will be fully restored to the base stat
                 if choice == "heal":
                     health = base_health
-                    yippie = "Alright, your pokenots are all healed up!"
+                    yippie = "Alright, your pokenots are all healed up!\n"
                     fancy(yippie)
                     break
                 #nurse happy will explain how the pokenot center works if you talk to her
                 elif choice == "explain":
-                    explanation = "This is a Pokenot Center, where you can heal all your Pokenot! It's completely free and essential to any trainer! So, type heal, explain, or leave:"
+                    explanation = "This is a Pokenot Center, where you can heal all your Pokenot! It's completely free and essential to any trainer! So, type heal, explain, or leave: "
                     fancy(explanation)
                     continue
                 elif choice == "leave":
-                    bye_bye = "Thank you for visiting the Pokenot Center!"
+                    bye_bye = "Thank you for visiting the Pokenot Center!\n"
                     fancy(bye_bye)
                     break
                 else:
-                    fancy("Please enter something valid! Your choices are heal, explain, or leave.")
+                    fancy("Please enter something valid! Your choices are heal, explain, or leave: ")
                     continue
         else:
             health = base_health
-            oh_no = "You took a beating out there. Your Pokenots have been restored to full health and you're free to go!"
+            oh_no = "You took a beating out there. Your Pokenots have been restored to full health and you're free to go!\n"
             fancy(oh_no)
         return health
     #define the function for the training ground
-    def training_field(base_health,health,attack,starter):
-        #your stats
+    def training_field(base_health,health,attack,starter,invent):
+        inventory = [invent]
         #enemy stats
         enemy_health = 55
         enemy_attack = 9
         def user_turn():
-            fancy("Type attack, potion, or forfeit")
+            fancy("\nType attack, potion, or forfeit: ")
             choice = input()
             if choice == "attack":
                 return "attack"
@@ -162,40 +167,43 @@ while True:
                 user_turn()
         def enemy_turn(health):
             health-=enemy_attack
-            fancy(f"Squishy attacked! your {starter} has {health} remaining!")
+            fancy(f"Squishy attacked! your {starter} has {health} remaining!\n")
             return health
         #describe the training ground and what they can do there
-        description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle if you'd like to practice battle me or leave"
+        description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle or leave: "
         fancy(description)
         #give them the option to leave or battle the trainer
         while True:
             choice = input().strip().lower()
             if choice == "battle":
                 #if they choose to battle then have them battle
-                yippie = "Yes! I haven't had someone to battle in forever, no backing out now!"
+                yippie = "Yes! I haven't had someone to battle in forever, no backing out now!\n"
                 fancy(yippie)
                 while True:
                     action = user_turn()
                     if action == "attack":
                         enemy_health -= attack
                         if enemy_health <0:
-                            fancy("Squishy has fainted!")
+                            fancy("Squishy has fainted!\n")
                             won = True
+                            description = "You walk into the town square again\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on: "
+                            fancy(description)
                             break
                         else:
-                            fancy(f"You attacked pikachu! Pikachu now has {enemy_health} health remaining")
+                            fancy(f"You attacked pikachu! Pikachu now has {enemy_health} health remaining\n")
                     elif action == "health":
                         health += 15
-                        print(f"You healed your Pokenot, they now have {health} health left")
+                        print(f"You healed your Pokenot, they now have {health} health left\n")
+                        inventory.remove("potion")
                         continue
                     elif action == "forfeit":
-                        fancy("Too flipping bad, you can't forfeit a trainer battle!")
+                        fancy("Too flipping bad, you can't forfeit a trainer battle!\n")
                         continue
                     else:
-                        fancy("Yo, you gotta enter a valid input!")
+                        fancy("Yo, you gotta enter a valid input!\n")
                         continue
                     if health <= 0:
-                        fancy("You lost! You're a loser! How does it feel to lose to a little girl? Come back after being patched up")
+                        fancy("You lost! You're a loser! How does it feel to lose to a little girl? Come back after being patched up!\n")
                         won = False
                     else:
                         health = enemy_turn(health)
@@ -206,54 +214,74 @@ while True:
                     health+=10
                     attack+=10
                     base_health+=10
-                    return health,base_health,attack,starter
+                    return health,base_health,attack,starter,inventory
                 else:
                     health = pokenot_center("dead")
-                    return health,base_health,attack,starter
+                    return health,base_health,attack,starter,inventory
                 #if they loose then they'll be taken to the pokenot center
             elif choice == "leave":
                 #if they choose to leave then return them to town square
                 break
             else:
-                fancy("Please enter something valid! Your choices are battle or leave")
+                fancy("Please enter something valid! Your choices are battle or leave: ")
                 continue
-        return base_health,health,attack,starter
+        clear()
+        return base_health,health,attack,starter,inventory
     #define the funciton for the town square
-    def town_square(base_health,health,attack,starter):
+    def town_square(base_health,health,attack,starter,inventory):
         #display the description of town square
-        description = "You walk into the town square and see a sign. Welcome to Pal town! There's a few buildings, a shop and a building labeled Pokenot Center? There's also a field and a person standing around\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on:"
+        talked_to_npc = False
+        description = "You walk into the town square and see a sign. Welcome to Pal town! There's a few buildings, a shop and a building labeled Pokenot Center? There's also a field and a person standing around\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on: "
         fancy(description)
         while True:
         #get their choice of where they want to go or talk to the npc
             choice = input("").lower().strip()
             if choice == "shop":
-                shop()
+                inventory = shop()
+                fancy("You go back to the town square. Your options are shop, center, field or talk: ")
                 continue
             elif choice == "center":
-                health = pokenot_center()
+                health = pokenot_center("choice")
+                fancy("You go back to the town square. Your options are shop, center, field or talk: ")
                 continue
             elif choice == "field":
-                base_health,health,attack,starter = training_field(base_health,health,attack,starter)
+                health,base_health,attack,starter,inventory = training_field(base_health,health,attack,starter,inventory)
                 continue
             #if they choose to talk to the npcs then go through the dialogue which will allow them to get a secret later on
             elif choice == "talk":
-                dialogue = "Hi, you don't look like you're from around here, welcome to Pal Town! The name's Garey Spruce, I'm the professors grandson.\nLet me give you a little secret. On the path to the Gym, I hid a special gift for anyone to find. Keep an eye out when you get there!"
+                dialogue = "Hi, you don't look like you're from around here, welcome to Pal Town! The name's Garey Spruce, I'm the professors grandson.\nLet me give you a little secret. On the path to the Gym, I hid a special gift for anyone to find. Keep an eye out when you get there!\n"
                 fancy(dialogue)
+                fancy("You go back to the town square. Your options are shop, center, field or talk: ")
                 talked_to_npc = True
                 continue
             elif choice == "continue":
                 break
             else:
-                fancy("Please enter a valid input")
+                fancy("Please enter a valid input. Your options are shop, center, field, talk, or continue: ")
                 continue
-        exit = "You're ready to move on? Press enter to go when you're ready"
+        exit = "You're ready to move on? Press enter to go when you're ready\n"
         fancy(exit)
         input()
-        return health,base_health,attack,talked_to_npc
+        clear()
+        return health,base_health,attack,talked_to_npc,inventory
     #define the function for the second path
+    def path2(talked_to_npc):
         #display the description of the path
+        description = "As you leave town, you walk along another beaten old path"
+        fancy(description)
         #if they talked to the npc in town square, then give them the option to search a bush where they'll find a secret pokesphere
+        if talked_to_npc == True:
+            fancy("As you walk, you remember what Garey said. The only place he could have hid something is a bush nearby. You check behind, and sure enough you find a expertball")
+            inventory.append("expertball")
+            fancy("Press enter to continue\n")
+            input()
+            clear()
         #if not then they can just continue on their way to the gym
+        else:
+            fancy("You continue walking along on your way to the gym. Press enter to continue\n")
+            input()
+            clear()
+        return inventory
     #define the function for the first room in the gym
         #display the description of the room and their goal
         #have them solve the puzzle
@@ -269,6 +297,8 @@ while True:
     #display the introduction to the game
     #start them off in the first room
     #make all the basic stats and things as variables for inventory, attack, health
+
     base_health,health,attack,starter = starter_room()
     path1()
-    town_square(base_health,health,attack,starter)
+    health, base_health,attack,talked_to_npc,inventory= town_square(base_health,health,attack,starter,inventory)
+    inventory = path2(talked_to_npc)
