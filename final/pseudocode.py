@@ -214,13 +214,15 @@ while True:
                     health+=10
                     attack+=10
                     base_health+=10
-                    return health,base_health,attack,starter,inventory
+                    return health,base_health,attack,starter,inventory,won
                 else:
                     health = pokenot_center("dead")
                     return health,base_health,attack,starter,inventory
                 #if they loose then they'll be taken to the pokenot center
             elif choice == "leave":
                 #if they choose to leave then return them to town square
+                description = "You walk into the town square again\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on: "
+                fancy(description)
                 break
             else:
                 fancy("Please enter something valid! Your choices are battle or leave: ")
