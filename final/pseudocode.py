@@ -247,7 +247,8 @@ while True:
                 fancy("You go back to the town square. Your options are shop, center, field or talk: ")
                 continue
             elif choice == "field":
-                health,base_health,attack,starter,inventory = training_field(base_health,health,attack,starter,inventory)
+
+                health,base_health,attack,starter,inventory,won = training_field(base_health,health,attack,starter,inventory)
                 continue
             #if they choose to talk to the npcs then go through the dialogue which will allow them to get a secret later on
             elif choice == "talk":
@@ -265,7 +266,7 @@ while True:
         fancy(exit)
         input()
         clear()
-        return health,base_health,attack,talked_to_npc,inventory
+        return health,base_health,attack,talked_to_npc,inventory,won
     #define the function for the second path
     def path2(talked_to_npc):
         #display the description of the path
@@ -275,23 +276,47 @@ while True:
         if talked_to_npc == True:
             fancy("As you walk, you remember what Garey said. The only place he could have hid something is a bush nearby. You check behind, and sure enough you find a expertball")
             inventory.append("expertball")
-            fancy("Press enter to continue\n")
+            fancy("\nPress enter to continue\n")
             input()
             clear()
         #if not then they can just continue on their way to the gym
-        else:
-            fancy("You continue walking along on your way to the gym. Press enter to continue\n")
-            input()
-            clear()
+        fancy("\nYou continue walking along on your way to the gym. Press enter to continue\n")
+        input()
+        clear()
         return inventory
     #define the function for the first room in the gym
+    def room1(base_health,health,attack,starter,inventory):
         #display the description of the room and their goal
+        fancy("You enter the gym and see a sign explaining everything.\nWelcome to Colonel Upsurge's gym! This is the first room before you can battle me. You must solve this puzzle before you can continue")
         #have them solve the puzzle
+        fancy("For you puzzle, you need to solve the riddle!")
+        fancy("\nPress enter when you're ready")
+        input()
+        while True:
+            fancy("I'm a number, but add a G and I go away. What am I?")
+            fancy("\nType the word out, not a digit")
+            if input("\n").strip().lower() == "one":
+                break
+            else:
+                fancy("Try again!\n")
         #once they beat the puzzle, they can enter the final room
         #make it clear once they enter the final room there's no going back
+        fancy("You hear a click, and the door unlocks! A new sign appears on it.\nOnce you proceed, there's no going back\nType town to return to the town if you'd like to prepare again, or continue")
         #allow them to leave to prepare more or enter
+        while True:
+            choice = input("\n")
+            if choice == "town":
+                town_square(base_health,health,attack,starter,inventory)
+            elif choice == "continue":
+                break
+            else:
+                fancy("Put something valid! Your choices are town or continue: ")
+                continue
+        fancy("You open the door and step into Colonel Upsurge's room")
     #define the function for the final room
+    def finaly_room(base_health,health,attack,starter,inventory):
         #describe the room before the gym leader immediately innitiates battle
+        fancy("")
         #have them battle
         #if you lose, it says goodbye and you have to restart
         #if you win and you got the pokesphere form earlier, you can capture the gym leader and sell him into slavery
@@ -304,3 +329,5 @@ while True:
     path1()
     health, base_health,attack,talked_to_npc,inventory= town_square(base_health,health,attack,starter,inventory)
     inventory = path2(talked_to_npc)
+    room1(base_health,health,attack,starter,inventory)
+    final_room(base_health,health,attack,starter,inventory)
