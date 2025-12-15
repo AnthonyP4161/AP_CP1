@@ -192,10 +192,14 @@ while True:
                         else:
                             fancy(f"You attacked pikachu! Pikachu now has {enemy_health} health remaining\n")
                     elif action == "health":
-                        health += 15
-                        print(f"You healed your Pokenot, they now have {health} health left\n")
-                        inventory.remove("potion")
-                        continue
+                        if "potion" in inventory:
+                            health += 15
+                            print(f"You healed your Pokenot, they now have {health} health left\n")
+                            inventory.remove("potion")
+                            continue
+                        else:
+                            fancy("WOMP WOMP YOU DON'T HAVE A POTION")
+                            continue
                     elif action == "forfeit":
                         fancy("Too flipping bad, you can't forfeit a trainer battle!\n")
                         continue
@@ -314,10 +318,89 @@ while True:
                 continue
         fancy("You open the door and step into Colonel Upsurge's room")
     #define the function for the final room
-    def finaly_room(base_health,health,attack,starter,inventory):
+    def final_room(base_health,health,attack,starter,inventory):
         #describe the room before the gym leader immediately innitiates battle
-        fancy("")
+        fancy("You walk into the room and see a man you assume is Colonel Upsurge! He yells out\nGET OVER HERE! I'VE WAITED TO LONG FOR THIS AND WE NEED TO BATTLE NOW")
         #have them battle
+        enemy_health = 67
+        enemy_attack = 10
+        def user_turn():
+            fancy("\nType attack, potion, or forfeit: ")
+            choice = input()
+            if choice == "attack":
+                return "attack"
+            elif choice == "potion":
+                return "health"
+            elif choice == "forfeit":
+                fancy("Too bad, you can't forfeit a trainer battle!")
+                user_turn()
+            else:
+                print("Choose a valid option")
+                user_turn()
+        def enemy_turn(health):
+            health-=enemy_attack
+            fancy(f"Squishy attacked! your {starter} has {health} remaining!\n")
+            return health
+        #describe the training ground and what they can do there
+        description = "You enter the field and see a sign labeled Training Ground and a girl standing on one end. As you approach, she says Hi and welcome to the training ground.\nHere you can practice against me to level up your Pokenots!\nType battle or leave: "
+        fancy(description)
+        #give them the option to leave or battle the trainer
+        while True:
+            choice = input().strip().lower()
+            if choice == "battle":
+                #if they choose to battle then have them battle
+                yippie = "Yes! I haven't had someone to battle in forever, no backing out now!\n"
+                fancy(yippie)
+                while True:
+                    action = user_turn()
+                    if action == "attack":
+                        enemy_health -= attack
+                        if enemy_health <0:
+                            fancy("Squishy has fainted!\n")
+                            won = True
+                            description = "You walk into the town square again\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on: "
+                            fancy(description)
+                            break
+                        else:
+                            fancy(f"You attacked pikachu! Pikachu now has {enemy_health} health remaining\n")
+                    elif action == "health":
+                        if "potion" in inventory:
+                            health += 15
+                            print(f"You healed your Pokenot, they now have {health} health left\n")
+                            inventory.remove("potion")
+                            continue
+                        else:
+                            fancy("WOMP WOMP YOU DON'T HAVE A POTION")
+                            continue
+                    elif action == "forfeit":
+                        fancy("Too flipping bad, you can't forfeit a trainer battle!\n")
+                        continue
+                    else:
+                        fancy("Yo, you gotta enter a valid input!\n")
+                        continue
+                    if health <= 0:
+                        fancy("You lost! You're a loser! How does it feel to lose to a little girl? Come back after being patched up!\n")
+                        won = False
+                    else:
+                        health = enemy_turn(health)
+                        continue
+                    break
+                #if they win then their pokemon will level up and gain more attack and health
+                if won == True:
+                    fancy("HOLY GAUCAMOLE YOU WON")
+                    return health,base_health,attack,starter,inventory,won
+                else:
+                    won = False
+                    return health,base_health,attack,starter,inventory,won
+                #if they loose then they'll be taken to the pokenot center
+            elif choice == "leave":
+                #if they choose to leave then return them to town square
+                description = "You walk into the town square again\nEnter shop, center, field, or talk to choose where you'd like to go, or continue if you'd just like to move on: "
+                fancy(description)
+                break
+            else:
+                fancy("Please enter something valid! Your choices are battle or leave: ")
+                continue
         #if you lose, it says goodbye and you have to restart
         #if you win and you got the pokesphere form earlier, you can capture the gym leader and sell him into slavery
         #ask them to restart or exit
@@ -330,4 +413,36 @@ while True:
     health, base_health,attack,talked_to_npc,inventory= town_square(base_health,health,attack,starter,inventory)
     inventory = path2(talked_to_npc)
     room1(base_health,health,attack,starter,inventory)
-    final_room(base_health,health,attack,starter,inventory)
+    health,base_health,attack,starter,inventory,won = final_room(base_health,health,attack,starter,inventory)
+    if won == True:
+        fancy("You are in fact a winner!")
+        if "expertball" in inventory:
+            fancy("You use your expertball to capture Colonel Surge in it. You will now sell him on the black market")
+        while True:
+            fancy("You hit the griddy to celebrate your victory!Type again to play again or exit to exit\n")
+            choice = input("").strip().lower()
+            if choice == "again":
+                break
+            elif choice == "exit":
+                break
+            else:
+                continue
+        if choice == "again":
+            continue
+        elif choice == "exit":
+            break
+    else:
+        fancy("HAHAHA YOU'RE A LOSER! YOU HEAR THAT? A LOSER!")
+        while True:
+            fancy("Type again to play again or exit to exit\n")
+            choice = input("").strip().lower()
+            if choice == "again":
+                break
+            elif choice == "exit":
+                break
+            else:
+                continue
+        if choice == "again":
+            continue
+        elif choice == "exit":
+            break
